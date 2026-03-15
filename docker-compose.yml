@@ -1,0 +1,34 @@
+version: '3.9'
+
+services:
+  bff:
+    build:
+      context: ./bff
+      dockerfile: Dockerfile
+    container_name: driva-bff
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+      - HOST=0.0.0.0
+    restart: unless-stopped
+    networks:
+      - driva-network
+
+  ui:
+    build:
+      context: ./ui
+      dockerfile: Dockerfile
+    container_name: driva-ui
+    ports:
+      - "3000:80"
+    depends_on:
+      - bff
+    restart: unless-stopped
+    networks:
+      - driva-network
+
+networks:
+  driva-network:
+    driver: bridge
