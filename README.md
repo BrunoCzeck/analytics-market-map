@@ -1,297 +1,119 @@
-# Driva - Market Intelligence Dashboard
+# Driva - Analise de Mercado
 
-A Brazil market intelligence dashboard with an interactive map showing layered business data. Built to support strategic decisions about market expansion, competitive analysis, and demand estimation across all 27 Brazilian states.
+## Produção
 
-## Overview
+- **UI:** 
+Link Produção:
+https://analytics-market-map-ui.vercel.app/
 
-Driva provides a full-screen interactive map of Brazil with toggleable data layers:
+## Repositorio
 
-- **Filiais Ativas** - Active branch locations (green markers)
-- **Potencial de Mercado** - Market potential heatmap per state (color-coded by score)
-- **Demanda Estimada** - Estimated demand bubbles proportional to volume
-- **Zonas de Expansão** - Priority expansion zones (dashed purple outlines)
-- **Concorrência** - Known competitor locations (red markers)
-
-Clicking any state marker opens a detail panel with metrics, a market potential score, and a comparative bar chart of the top 8 states.
+https://github.com/BrunoCzeck/analytics-market-map.git
 
 ---
 
-## Architecture
+## Setup
 
-```
-┌─────────────────────────────────────────┐
-│               Browser                   │
-│  React + Vite (port 3000)               │
-│  ┌─────────────────────────────────┐    │
-│  │  Dashboard (react-leaflet map)  │    │
-│  │  LayerPanel  │  FilterBar       │    │
-│  │  RegionPanel │  StatsBar        │    │
-│  └──────────────┬──────────────────┘    │
-└─────────────────┼───────────────────────┘
-                  │ HTTP /api/v1/*
-                  ▼
-┌─────────────────────────────────────────┐
-│          BFF - Node.js + Fastify        │
-│          (port 3001)                    │
-│                                         │
-│  Interfaces (HTTP routes)               │
-│    /branches  /states  /competitors     │
-│    /market/potential  /market/demand    │
-│    /market/expansion-zones  /overview   │
-│                                         │
-│  Application (Use Cases)                │
-│    GetBranches  GetStates  GetCompetitors│
-│                                         │
-│  Domain (Entities + Repository Interfaces)│
-│    Branch  State  Competitor            │
-│                                         │
-│  Infrastructure (In-Memory Repositories)│
-│    Mock data for all 27 states + branches│
-└─────────────────────────────────────────┘
-```
-
----
-
-## Project Structure
-
-```
-driva/
-├── docker-compose.yml
-├── README.md
-├── bff/
-│   ├── Dockerfile
-│   ├── package.json
-│   ├── tsconfig.json
-│   └── src/
-│       ├── server.ts
-│       ├── domain/
-│       │   ├── entities/
-│       │   │   ├── Branch.ts
-│       │   │   ├── State.ts
-│       │   │   └── Competitor.ts
-│       │   └── repositories/
-│       │       ├── IBranchRepository.ts
-│       │       ├── IStateRepository.ts
-│       │       └── ICompetitorRepository.ts
-│       ├── infrastructure/
-│       │   ├── mock-data/
-│       │   │   ├── branches.ts
-│       │   │   ├── states.ts
-│       │   │   └── competitors.ts
-│       │   └── repositories/
-│       │       ├── InMemoryBranchRepository.ts
-│       │       ├── InMemoryStateRepository.ts
-│       │       └── InMemoryCompetitorRepository.ts
-│       ├── application/
-│       │   └── use-cases/
-│       │       ├── GetBranches.ts
-│       │       ├── GetStates.ts
-│       │       └── GetCompetitors.ts
-│       └── interfaces/
-│           └── http/
-│               └── routes/
-│                   ├── branches.ts
-│                   ├── states.ts
-│                   ├── competitors.ts
-│                   └── market.ts
-└── ui/
-    ├── Dockerfile
-    ├── nginx.conf
-    ├── package.json
-    ├── tsconfig.json
-    ├── tsconfig.node.json
-    ├── vite.config.ts
-    ├── index.html
-    └── src/
-        ├── main.tsx
-        ├── App.tsx
-        ├── types/
-        │   └── index.ts
-        ├── services/
-        │   └── api.ts
-        ├── contexts/
-        │   ├── LayerContext.tsx
-        │   └── FilterContext.tsx
-        ├── hooks/
-        │   └── useMapData.ts
-        ├── components/
-        │   ├── Map/
-        │   │   ├── BrazilMap.tsx
-        │   │   ├── MapLegend.tsx
-        │   │   └── StatsBar.tsx
-        │   ├── LayerPanel/
-        │   │   └── LayerPanel.tsx
-        │   ├── Filters/
-        │   │   └── FilterBar.tsx
-        │   └── RegionPanel/
-        │       └── RegionPanel.tsx
-        └── pages/
-            └── Dashboard/
-                └── Dashboard.tsx
-```
-
----
-
-## Running Locally
-
-### Prerequisites
-
+### Pré-requisitos
 - Node.js 20+
-- npm 9+
+- npm ou yarn
+- Docker e Docker Compose (para rodar via container)
 
-### BFF
+### Instalação local
 
+**BFF:**
 ```bash
 cd bff
 npm install
-npm run dev
-# BFF available at http://localhost:3001
 ```
 
-### UI
-
+**UI:**
 ```bash
 cd ui
 npm install
-npm run dev
-# UI available at http://localhost:3000
 ```
-
-The Vite dev server proxies `/api/*` requests to `http://localhost:3001`, so both services must be running simultaneously.
 
 ---
 
-## Running with Docker
+## Uso
+
+### Desenvolvimento local
+
+**BFF** (porta 3001):
+```bash
+cd bff
+npm run dev
+```
+
+**UI** (porta 3000):
+```bash
+cd ui
+npm run dev
+```
+
+Acesse `http://localhost:3000`.
+
+### Docker Compose
+
+Sobe BFF e UI juntos com um único comando:
 
 ```bash
 docker compose up --build
 ```
 
-- UI: http://localhost:3000
-- BFF: http://localhost:3001
+- UI: `http://localhost:3000`
+- BFF: `http://localhost:3001`
 
-To run only the BFF:
+Para parar:
+```bash
+docker compose down
+```
+
+### Build para produção
 
 ```bash
-docker compose up --build bff
+# BFF
+cd bff && npm run build && npm start
+
+# UI
+cd ui && npm run build
 ```
 
 ---
 
-## Deploying to Vercel (UI)
+## Camadas de dados
 
-1. Install the Vercel CLI:
+O mapa exibe 5 camadas independentes, ativáveis pelo painel lateral:
 
-```bash
-npm install -g vercel
-```
+| Camada | Cor | Descrição |
+|---|---|---|
+| **Filiais** | Verde | Unidades ativas da empresa com localização geográfica |
+| **Potencial de mercado** | Azul | Score por estado (0–100) baseado em PIB per capita, renda média e população |
+| **Demanda estimada** | Âmbar | Bolhas proporcionais à demanda projetada por estado |
+| **Zonas de expansão** | Roxo | Estados estratégicos para abertura de novas unidades |
+| **Concorrentes** | Vermelho | Localização de concorrentes mapeados (Brand A, B e C) |
 
-2. Deploy the UI, pointing to your deployed BFF URL:
-
-```bash
-cd ui
-vercel --prod
-```
-
-3. Set the environment variable in the Vercel dashboard (or via CLI):
-
-```bash
-vercel env add VITE_API_URL
-# Enter: https://your-bff-domain.com/api/v1
-```
-
-4. Redeploy after setting the env var:
-
-```bash
-vercel --prod
-```
-
-Note: The BFF can be deployed to any Node.js-compatible platform (Railway, Render, Fly.io, AWS, etc.). Make sure to configure CORS to allow the Vercel domain.
+Os dados são filtráveis por **região** (Norte, Nordeste, Centro-Oeste, Sudeste, Sul), **período** e **busca textual** por nome, cidade ou estado.
 
 ---
 
-## API Endpoints
+## Decisões técnicas e trade-offs ##
 
-Base URL: `http://localhost:3001`
+### Clean Architecture no BFF
+O BFF foi estruturado em camadas (Domain → Application → Infrastructure → HTTP) para isolar regras de negócio da implementação. Facilitando também na troca dos dados mockados por uma base real.
 
-### Health
+### Dados mock em memória
+Todos os dados (27 estados, filiais, concorrentes) são servidos de arrays in-memory. A escolha elimina dependência de banco de dados externo. Os repositórios implementam interfaces, então a migração para  banco exige apenas nova implementação da camada de infraestrutura.
 
-| Method | Path      | Description        |
-|--------|-----------|--------------------|
-| GET    | /health   | Health check       |
+### Fastify no lugar de Express
+Fastify oferece melhor performance e validação de schema nativa. O trade-off é um ecossistema menor que Express, mas suficiente para um BFF focado em leitura de dados.
 
-### Branches
+### Context API
+O estado global da UI (filtros e camadas) usa Context API nativa do React por ser simples e sem dependências extras.
 
-| Method | Path                  | Query Params        | Description                    |
-|--------|-----------------------|---------------------|--------------------------------|
-| GET    | /api/v1/branches      | state?, since?      | List all branches (filterable) |
-| GET    | /api/v1/branches/:id  | -                   | Get branch by ID               |
+### Proxy no Vite
+A UI faz chamadas para `/api` e o Vite redireciona para `http://localhost:3001` em desenvolvimento. Isso evita problemas de CORS localmente e mantém a mesma URL de chamada entre dev e produção.
 
-### States
+### Deploy separado (UI e BFF na Vercel)
+Cada serviço tem seu próprio `vercel.json`, permitindo deploys independentes.
 
-| Method | Path                  | Query Params   | Description                     |
-|--------|-----------------------|----------------|---------------------------------|
-| GET    | /api/v1/states        | region?        | List all states (filterable)    |
-| GET    | /api/v1/states/:uf    | -              | Get state by UF code (e.g. SP)  |
-
-### Competitors
-
-| Method | Path                  | Query Params   | Description                        |
-|--------|-----------------------|----------------|------------------------------------|
-| GET    | /api/v1/competitors   | state?         | List competitors (filterable)      |
-
-### Market
-
-| Method | Path                              | Query Params   | Description                          |
-|--------|-----------------------------------|----------------|--------------------------------------|
-| GET    | /api/v1/market/potential          | region?        | Market potential scores per state    |
-| GET    | /api/v1/market/demand             | region?        | Estimated demand per state           |
-| GET    | /api/v1/market/expansion-zones    | region?        | States flagged as expansion zones    |
-| GET    | /api/v1/market/overview           | -              | Aggregated national overview stats   |
-
-### Example Responses
-
-```json
-// GET /api/v1/market/overview
-{
-  "data": {
-    "totalStates": 27,
-    "statesWithBranches": 8,
-    "expansionZones": 13,
-    "avgMarketPotential": 52,
-    "totalEstimatedDemand": 1908000,
-    "byRegion": [
-      { "region": "Sudeste", "states": 4, "avgScore": 83, "totalDemand": 925000 },
-      ...
-    ]
-  }
-}
-```
-
----
-
-## Technology Stack
-
-### BFF
-- **Runtime**: Node.js 20
-- **Framework**: Fastify 4
-- **Language**: TypeScript 5
-- **Architecture**: Domain-Driven Design (DDD) with layered architecture
-  - Domain: entities + repository interfaces
-  - Infrastructure: in-memory repository implementations + mock data
-  - Application: use-case classes
-  - Interfaces: HTTP route handlers
-
-### UI
-- **Framework**: React 18
-- **Build tool**: Vite 5
-- **Language**: TypeScript 5
-- **Map**: Leaflet + react-leaflet (CartoDB dark tile layer)
-- **Charts**: Recharts
-- **HTTP client**: Axios
-- **State**: React Context (LayerContext, FilterContext)
-
-### Infrastructure
-- **Containerization**: Docker (multi-stage builds)
-- **Orchestration**: Docker Compose
-- **Web server (production UI)**: Nginx with SPA fallback and API proxy
