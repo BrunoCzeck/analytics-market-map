@@ -73,7 +73,7 @@ export interface RegionSummary {
   avgScore: number;
   totalDemand: number;
 }
-
+// Types fixos
 export type Region = 'Norte' | 'Nordeste' | 'Centro-Oeste' | 'Sudeste' | 'Sul';
 
 export type LayerId = 'branches' | 'marketPotential' | 'estimatedDemand' | 'expansionZones' | 'competitors';

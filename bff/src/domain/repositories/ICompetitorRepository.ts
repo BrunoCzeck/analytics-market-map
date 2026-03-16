@@ -1,4 +1,4 @@
-import { Competitor } from '../entities/Competitor';
+import { Competitor } from '../entities';
 
 export interface ICompetitorRepository {
   findAll(): Promise<Competitor[]>;

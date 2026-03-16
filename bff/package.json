@@ -1,7 +1,7 @@
 {
   "name": "driva-bff",
   "version": "1.0.0",
-  "description": "Backend for Frontend - Driva Market Dashboard",
+  "description": "Driva Back End",
   "main": "dist/server.js",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",

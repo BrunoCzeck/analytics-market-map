@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLayers } from '../../contexts/LayerContext';
+import { useLayers } from '../../contexts/layer-context';
 import type { Layer } from '../../types';
 
 function LayerToggle({ layer, onToggle }: { layer: Layer; onToggle: () => void }) {

@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { BrazilMap } from '../../components/Map/BrazilMap';
-import { LayerPanel } from '../../components/LayerPanel/LayerPanel';
-import { FilterBar } from '../../components/Filters/FilterBar';
-import { RegionPanel } from '../../components/RegionPanel/RegionPanel';
-import { MapLegend } from '../../components/Map/MapLegend';
-import { StatsBar } from '../../components/Map/StatsBar';
-import { useFilters } from '../../contexts/FilterContext';
-import { useMapData, useStateDetail } from '../../hooks/useMapData';
+import { BrazilMap, MapLegend, StatsBar } from '../../components/map';
+import { LayerPanel } from '../../components/layerpanel';
+import { FilterBar } from '../../components/filters';
+import { RegionPanel } from '../../components/regionpanel';
+import { useFilters } from '../../contexts/filter-context';
+import { useMapData, useStateDetail } from '../../hooks/use-map-data';
 import { marketService } from '../../services/api';
 import type { MarketOverview } from '../../types';
+import { Loading } from '../../components/loading';
 
-export function Dashboard() {
+export function Dashboard() { 
   const { filters } = useFilters();
   const { branches, competitors, marketPotential, demandData, expansionZones, loading, error } = useMapData(filters);
   const [selectedUf, setSelectedUf] = useState<string | null>(null);
@@ -42,7 +41,6 @@ export function Dashboard() {
 
   return (
     <div style={{ width: '100%', height: '100vh', position: 'relative', background: '#0f172a' }}>
-      {/* Header */}
       <div
         style={{
           position: 'absolute',
@@ -63,21 +61,20 @@ export function Dashboard() {
           <div style={{ width: '28px', height: '28px', background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '14px', fontWeight: 800, color: 'white' }}>D</div>
           <div>
             <div style={{ fontSize: '15px', fontWeight: 700, color: '#f1f5f9', lineHeight: 1 }}>Driva</div>
-            <div style={{ fontSize: '10px', color: '#64748b', lineHeight: 1 }}>Market Intelligence</div>
+            <div style={{ fontSize: '10px', color: '#64748b', lineHeight: 1 }}>Analise de Mercado</div>
           </div>
         </div>
 
         <FilterBar />
 
         {loading && (
-          <div style={{ marginLeft: 'auto', fontSize: '12px', color: '#64748b' }}>Carregando dados...</div>
+          <div style={{ marginLeft: 'auto', fontSize: '12px', color: '#64748b' }}><Loading /></div>
         )}
         {error && (
           <div style={{ marginLeft: 'auto', fontSize: '12px', color: '#ef4444' }}>Erro ao carregar: {error}</div>
         )}
       </div>
 
-      {/* Map Area */}
       <div style={{ position: 'absolute', top: '56px', left: 0, right: 0, bottom: 0 }}>
         <BrazilMap
           branches={filteredBranches}

@@ -24,7 +24,7 @@ async function bootstrap() {
   const host = process.env.HOST || '0.0.0.0';
 
   await fastify.listen({ port, host });
-  console.log(`BFF running on http://${host}:${port}`);
+  console.log(`BFF run http://${host}:${port}`);
 }
 
 bootstrap().catch(err => {

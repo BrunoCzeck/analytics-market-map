@@ -1,6 +1,6 @@
 import { FastifyInstance } from 'fastify';
-import { InMemoryCompetitorRepository } from '../../../infrastructure/repositories/InMemoryCompetitorRepository';
-import { GetCompetitors } from '../../../application/use-cases/GetCompetitors';
+import { InMemoryCompetitorRepository } from '../../../infrastructure/repositories';
+import { GetCompetitors } from '../../../application/use-cases';
 
 export async function competitorRoutes(fastify: FastifyInstance) {
   const repo = new InMemoryCompetitorRepository();

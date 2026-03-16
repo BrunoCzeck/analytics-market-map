@@ -2,9 +2,9 @@ export interface Branch {
   id: string;
   name: string;
   city: string;
-  state: string; // UF code e.g. "SP"
+  state: string;
   lat: number;
   lng: number;
-  openedAt: string; // ISO date
+  openedAt: string;
   active: boolean;
 }

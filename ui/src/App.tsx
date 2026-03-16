@@ -1,7 +1,7 @@
 import React from 'react';
-import { Dashboard } from './pages/Dashboard/Dashboard';
-import { LayerProvider } from './contexts/LayerContext';
-import { FilterProvider } from './contexts/FilterContext';
+import { Dashboard } from './pages/Dashboard';
+import { LayerProvider } from './contexts/layer-context';
+import { FilterProvider } from './contexts/filter-context';
 
 function App() {
   return (

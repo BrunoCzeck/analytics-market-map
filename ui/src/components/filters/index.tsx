@@ -1,5 +1,5 @@
 import React from 'react';
-import { useFilters } from '../../contexts/FilterContext';
+import { useFilters } from '../../contexts/filter-context';
 import type { Region } from '../../types';
 
 const REGIONS: Array<{ value: Region | 'all'; label: string }> = [

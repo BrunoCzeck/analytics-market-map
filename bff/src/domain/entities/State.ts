@@ -3,10 +3,10 @@ export interface State {
   name: string;
   region: 'Norte' | 'Nordeste' | 'Centro-Oeste' | 'Sudeste' | 'Sul';
   population: number;
-  gdpPerCapita: number; // R$ per year
+  gdpPerCapita: number;
   averageIncome: number;
-  marketPotentialScore: number; // 0-100
-  estimatedDemand: number; // units
+  marketPotentialScore: number;
+  estimatedDemand: number;
   isExpansionZone: boolean;
   branchCount: number;
 }

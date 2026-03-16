@@ -1,6 +1,6 @@
-import { Competitor } from '../../domain/entities/Competitor';
-import { ICompetitorRepository } from '../../domain/repositories/ICompetitorRepository';
-import { competitorsMock } from '../mock-data/competitors';
+import { Competitor } from '../../domain/entities';
+import { ICompetitorRepository } from '../../domain/repositories';
+import { competitorsMock } from '../mock-data';
 
 export class InMemoryCompetitorRepository implements ICompetitorRepository {
   private competitors: Competitor[] = competitorsMock;

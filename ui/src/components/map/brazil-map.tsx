@@ -1,7 +1,7 @@
 import React from 'react';
 import { MapContainer, TileLayer, CircleMarker, Popup, Tooltip } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import { useLayers } from '../../contexts/LayerContext';
+import { useLayers } from '../../contexts/layer-context';
 import type { Branch, Competitor, MarketPotential, DemandData, ExpansionZone } from '../../types';
 
 // Approximate centroids for Brazilian states
@@ -65,7 +65,7 @@ export function BrazilMap({ branches, competitors, marketPotential, demandData, 
       zoomControl={false}
     >
       <TileLayer
-        url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+        url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>'
         subdomains="abcd"
         maxZoom={19}

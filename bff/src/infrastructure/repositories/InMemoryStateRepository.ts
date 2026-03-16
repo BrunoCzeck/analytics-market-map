@@ -1,6 +1,6 @@
-import { State } from '../../domain/entities/State';
-import { IStateRepository } from '../../domain/repositories/IStateRepository';
-import { statesMock } from '../mock-data/states';
+import { State } from '../../domain/entities';
+import { IStateRepository } from '../../domain/repositories';
+import { statesMock } from '../mock-data';
 
 export class InMemoryStateRepository implements IStateRepository {
   private states: State[] = statesMock;

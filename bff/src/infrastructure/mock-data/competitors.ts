@@ -1,4 +1,4 @@
-import { Competitor } from '../../domain/entities/Competitor';
+import { Competitor } from '../../domain/entities';
 
 export const competitorsMock: Competitor[] = [
   { id: 'c1', name: 'CompetitorA SP', city: 'São Paulo', state: 'SP', lat: -23.5605, lng: -46.6433, brand: 'Brand A' },

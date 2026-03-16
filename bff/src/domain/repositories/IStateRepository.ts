@@ -1,4 +1,4 @@
-import { State } from '../entities/State';
+import { State } from '../entities';
 
 export interface IStateRepository {
   findAll(): Promise<State[]>;

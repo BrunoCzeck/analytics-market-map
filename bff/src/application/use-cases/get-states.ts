@@ -1,4 +1,4 @@
-import { State } from '../../domain/entities/State';
+import { State } from '../../domain/entities/state';
 import { IStateRepository } from '../../domain/repositories/IStateRepository';
 
 interface GetStatesInput {

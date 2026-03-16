@@ -1,4 +1,4 @@
-import { Branch } from '../../domain/entities/Branch';
+import { Branch } from '../../domain/entities';
 
 export const branchesMock: Branch[] = [
   { id: '1', name: 'Filial São Paulo Centro', city: 'São Paulo', state: 'SP', lat: -23.5505, lng: -46.6333, openedAt: '2020-03-15', active: true },

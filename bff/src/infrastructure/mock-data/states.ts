@@ -1,6 +1,6 @@
-import { State } from '../../domain/entities/State';
+import { State } from '../../domain/entities';
 
-export const statesMock: State[] = [
+export const statesMock: State[] = [    
   { uf: 'AC', name: 'Acre', region: 'Norte', population: 906876, gdpPerCapita: 18000, averageIncome: 1800, marketPotentialScore: 20, estimatedDemand: 5000, isExpansionZone: false, branchCount: 0 },
   { uf: 'AL', name: 'Alagoas', region: 'Nordeste', population: 3351543, gdpPerCapita: 15000, averageIncome: 1600, marketPotentialScore: 30, estimatedDemand: 15000, isExpansionZone: true, branchCount: 0 },
   { uf: 'AP', name: 'Amapá', region: 'Norte', population: 877613, gdpPerCapita: 19000, averageIncome: 1900, marketPotentialScore: 22, estimatedDemand: 6000, isExpansionZone: false, branchCount: 0 },

@@ -1,4 +1,4 @@
-import { Competitor } from '../../domain/entities/Competitor';
+import { Competitor } from '../../domain/entities/competitor';
 import { ICompetitorRepository } from '../../domain/repositories/ICompetitorRepository';
 
 interface GetCompetitorsInput {

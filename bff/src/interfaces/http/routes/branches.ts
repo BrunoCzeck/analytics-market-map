@@ -1,6 +1,6 @@
 import { FastifyInstance } from 'fastify';
-import { InMemoryBranchRepository } from '../../../infrastructure/repositories/InMemoryBranchRepository';
-import { GetBranches } from '../../../application/use-cases/GetBranches';
+import { InMemoryBranchRepository } from '../../../infrastructure/repositories';
+import { GetBranches } from '../../../application/use-cases';
 
 export async function branchRoutes(fastify: FastifyInstance) {
   const repo = new InMemoryBranchRepository();

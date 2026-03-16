@@ -28,10 +28,13 @@ export const competitorService = {
 export const marketService = {
   getPotential: (params?: { region?: string }) =>
     api.get<{ data: MarketPotential[]; total: number }>('/market/potential', { params }).then(r => r.data),
+  
   getDemand: (params?: { region?: string }) =>
     api.get<{ data: DemandData[]; total: number }>('/market/demand', { params }).then(r => r.data),
+  
   getExpansionZones: (params?: { region?: string }) =>
     api.get<{ data: ExpansionZone[]; total: number }>('/market/expansion-zones', { params }).then(r => r.data),
+  
   getOverview: () =>
     api.get<{ data: MarketOverview }>('/market/overview').then(r => r.data),
 };

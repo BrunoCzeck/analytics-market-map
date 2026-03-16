@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLayers } from '../../contexts/LayerContext';
+import { useLayers } from '../../contexts/layer-context';
 
 export function MapLegend() {
   const { layers } = useLayers();

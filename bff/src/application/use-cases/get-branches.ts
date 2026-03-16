@@ -1,9 +1,9 @@
-import { Branch } from '../../domain/entities/Branch';
+import { Branch } from '../../domain/entities/branch';
 import { IBranchRepository } from '../../domain/repositories/IBranchRepository';
 
 interface GetBranchesInput {
   state?: string;
-  since?: string; // ISO date filter
+  since?: string; // Filtra pela data (Formato: ISO)
 }
 
 export class GetBranches {

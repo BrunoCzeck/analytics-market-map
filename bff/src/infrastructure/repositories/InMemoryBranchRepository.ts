@@ -1,6 +1,6 @@
-import { Branch } from '../../domain/entities/Branch';
-import { IBranchRepository } from '../../domain/repositories/IBranchRepository';
-import { branchesMock } from '../mock-data/branches';
+import { Branch } from '../../domain/entities';
+import { branchesMock } from '../mock-data';
+import { IBranchRepository } from '../../domain/repositories';
 
 export class InMemoryBranchRepository implements IBranchRepository {
   private branches: Branch[] = branchesMock;

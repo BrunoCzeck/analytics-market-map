@@ -37,7 +37,7 @@ export function useMapData(filters: FilterState) {
         setExpansionZones(ez.data);
       } catch (e) {
         console.error(e);
-        window.location.reload();
+        setError(e instanceof Error ? e.message : 'Erro ao carregar dados');
       } finally {
         setLoading(false);
       }

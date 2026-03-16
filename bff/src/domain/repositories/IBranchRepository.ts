@@ -1,4 +1,4 @@
-import { Branch } from '../entities/Branch';
+import { Branch } from '../entities';
 
 export interface IBranchRepository {
   findAll(): Promise<Branch[]>;

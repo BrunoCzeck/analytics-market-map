@@ -1,5 +1,5 @@
 import { FastifyInstance } from 'fastify';
-import { InMemoryStateRepository } from '../../../infrastructure/repositories/InMemoryStateRepository';
+import { InMemoryStateRepository } from '../../../infrastructure/repositories';
 
 export async function marketRoutes(fastify: FastifyInstance) {
   const repo = new InMemoryStateRepository();

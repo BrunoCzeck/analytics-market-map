@@ -1,6 +1,6 @@
 import { FastifyInstance } from 'fastify';
-import { InMemoryStateRepository } from '../../../infrastructure/repositories/InMemoryStateRepository';
-import { GetStates } from '../../../application/use-cases/GetStates';
+import { InMemoryStateRepository } from '../../../infrastructure/repositories';
+import { GetStates } from '../../../application/use-cases';
 
 export async function stateRoutes(fastify: FastifyInstance) {
   const repo = new InMemoryStateRepository();
